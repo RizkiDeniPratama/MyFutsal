@@ -24,7 +24,9 @@
                 />
               </div>
               <button class="btn signin">Login</button>
-              <span class="signup">or <a href="#">Sign up</a></span>
+              <span class="signup"
+                >or <a href="#" @click.prevent="toRegister">Sign up</a></span
+              >
             </form>
           </div>
         </div>
@@ -51,6 +53,9 @@ export default {
         email: this.email,
         password: this.password,
       });
+    },
+    toRegister() {
+      this.$router.push({ name: "register" });
     },
   },
 };

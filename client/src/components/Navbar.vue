@@ -9,17 +9,27 @@
       </div>
       <ul class="nav-list">
         <li><a href="#">HOME</a></li>
-        <li><a href="#">EXPLORE</a></li>
         <li><a href="#">VENUE</a></li>
         <li><a href="#">ABOUT</a></li>
+        <li><a href="#" @click.prevent="logout">Logout</a></li>
       </ul>
     </nav>
   </header>
 </template>
 
 <script>
+import { mapStores } from "pinia";
+import { useUserStore } from "../stores/user";
 export default {
   name: "Navbar",
+  computed: {
+    ...mapStores(useUserStore),
+  },
+  methods: {
+    logout() {
+      this.userStore.logout();
+    },
+  },
 };
 </script>
 
