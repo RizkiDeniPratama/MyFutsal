@@ -2,6 +2,7 @@ const { User, VenueFutsal } = require("../models");
 
 class VenueController {
   static async getAll(req, res, next) {
+    const { name } = req.query;
     try {
       let option = {
         include: [
@@ -11,8 +12,15 @@ class VenueController {
           },
         ],
         order: [["id", "DESC"]],
+        where: {},
       };
+      if (name) {
+        option.where.name = {
+          [Op.iLike]: `%${name}%`,
+        };
+      }
       let venue = await VenueFutsal.findAll(option);
+      if (!data) throw { name: "NOT_PRODUCT" };
       res.status(200).json(venue);
     } catch (err) {
       console.log(err);
