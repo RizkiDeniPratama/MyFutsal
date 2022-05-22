@@ -25,8 +25,13 @@
               </div>
               <button class="btn signin">Login</button>
               <span class="signup"
-                >or <a href="#" @click.prevent="toRegister">Sign up</a></span
-              >
+                >or <a href="#" @click.prevent="toRegister">Sign up</a> or
+                <a
+                  href="#"
+                  class="social-icon d-flex align-items-center justify-content-center"
+                  ><span class="fa fa-google"></span
+                ></a>
+              </span>
             </form>
           </div>
         </div>
@@ -62,6 +67,31 @@ export default {
 </script>
 
 <style>
+.social-media {
+  position: relative;
+  width: 100%;
+}
+.social-media .social-icon {
+  display: block;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  font-size: 16px;
+  margin-right: 5px;
+  border-radius: 50%;
+}
+.social-media .social-icon span {
+  color: #999999;
+}
+.social-media .social-icon:hover,
+.social-media .social-icon:focus {
+  background: #e3b04b;
+}
+.social-media .social-icon:hover span,
+.social-media .social-icon:focus span {
+  color: #fff;
+}
 .form-container {
   font-family: "Mukta", sans-serif;
   padding: 0 20px 20px 0;
