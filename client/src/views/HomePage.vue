@@ -9,6 +9,7 @@
             </div>
           </div>
         </div>
+        <LiveScore />
       </div>
     </section>
   </div>
@@ -18,10 +19,12 @@
 import { mapActions, mapState } from "pinia";
 import { useVenueStore } from "../stores/venue";
 import CardVenue from "../components/VenueList.vue";
+import LiveScore from "../components/LiveScore.vue";
 export default {
   name: "HomePage",
   components: {
     CardVenue,
+    LiveScore,
   },
   methods: {
     ...mapActions(useVenueStore, ["getAll"]),
