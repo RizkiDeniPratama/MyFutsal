@@ -20,7 +20,7 @@ class VenueController {
         };
       }
       let venue = await VenueFutsal.findAll(option);
-      if (!data) throw { name: "NOT_PRODUCT" };
+      if (!venue) throw { name: "NOT_PRODUCT" };
       res.status(200).json(venue);
     } catch (err) {
       console.log(err);
