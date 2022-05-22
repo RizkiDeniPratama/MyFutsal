@@ -1,6 +1,8 @@
 const { User } = require("../models/index");
 const { compare } = require("../helpers/bcrypt.js");
 const { sign } = require("../helpers/jwt");
+const { OAuth2Client } = require("google-auth-library");
+const client = new OAuth2Client(process.env.CLIENT_ID);
 class UserController {
   static async register(req, res, next) {
     const { email } = req.body;
@@ -33,5 +35,53 @@ class UserController {
       next(err);
     }
   }
+  static googleLogin(req, res, next) {
+    const { id_token } = req.body;
+    let payload;
+    client
+      .verifyIdToken({
+        idToken: id_token,
+        audience: process.env.CLIENT_ID,
+      })
+      .then((ticket) => {
+        payload = ticket.getPayload();
+        return User.findOne({
+          where: {
+            email: payload.email,
+          },
+        });
+      })
+      .then((user) => {
+        if (!user) {
+          const newUser = {
+            username: payload.name,
+            email: payload.email,
+            password: "kebobalamung172",
+            phoneNumber: "0000000",
+            address: "indonesia",
+            role: "customer",
+          };
+          return User.create(newUser);
+        } else {
+          return user;
+        }
+      })
+      .then((data) => {
+        const accessToken = sign({
+          email: data.email,
+          id: data.id,
+          role: data.role,
+        });
+        res.status(200).json({
+          id: data.id,
+          name: data.username,
+          role: data.role,
+          message: "Success Sign In With Google",
+          Token: accessToken,
+        });
+      })
+      .catch((err) => next(err));
+  }
 }
+
 module.exports = UserController;
