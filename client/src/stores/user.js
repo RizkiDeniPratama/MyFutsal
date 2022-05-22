@@ -40,6 +40,32 @@ export const useUserStore = defineStore({
         .catch((err) => console.log(err));
     },
 
+    async handleUserLoginGoogle() {
+      try {
+        const googleUser = await this.$gAuth.signIn();
+        if (!googleUser) {
+          return null;
+        }
+        this.user = googleUser.getBasicProfile().getEmail();
+        console.log("getAuthResponse", googleUser.getAuthResponse().id_token);
+        let id_token = googleUser.getAuthResponse().id_token;
+        const res = await axios({
+          method: "POST",
+          url: "users/google-login",
+          data: {
+            id_token,
+          },
+        });
+        console.log(this.baseUrl);
+        localStorage.setItem("accessToken", res.data.Token);
+
+        this.router.push({ name: "home" });
+      } catch (error) {
+        console.error(error);
+        return null;
+      }
+    },
+
     logout() {
       localStorage.clear();
       this.access_token = null;
