@@ -24,6 +24,8 @@ class ScheduleController {
         },
       });
 
+      if (!oneSchedule) throw { name: "NOT_SCHEDULE" };
+
       res.status(200).json(oneSchedule);
     } catch (err) {
       console.log(err);
@@ -50,6 +52,7 @@ class ScheduleController {
         where: { id },
         returning: true,
       };
+      if (!price && !DateTime && !hour) throw { name: "EMPTY_BODY_SCHEDULE" };
 
       let editSchedule = await Schedule.update(
         { price, DateTime, hour },

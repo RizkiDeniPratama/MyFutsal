@@ -374,3 +374,284 @@ not needed
 }
 ```
 
+### GET /schedules
+
+> GET all data schedule
+
+**_Request Header :_**
+
+```
+{
+  "accessToken": "<your access token>"
+}
+```
+
+**_Request Body :_**
+
+```
+not needed
+```
+
+**_Response (200 - OK) :_**
+
+```
+[
+  {
+    "id": 2,
+    "price": 100000,
+    "DateTime": "2022-05-24T17:00:00.000Z",
+    "hour": "10:41:39"
+  },
+  {
+    "id": 3,
+    "price": 75000,
+    "DateTime": "2022-06-02T17:00:00.000Z",
+    "hour": "11:41:39"
+  },
+  {
+    "id": 4,
+    "price": 150000,
+    "DateTime": "2022-06-05T17:00:00.000Z",
+    "hour": "09:41:39"
+  }
+]
+```
+
+**_Response (_500 - There was an error on the server and the request could not be completed, and 401 - Unauthorized_)_**
+
+- 500
+
+```
+{
+  "message": "Internal Server err"
+}
+```
+
+- 401
+
+```
+{
+  "message": "Token nya tidak ada"
+}
+```
+
+### GET /schedules/:scheduleId
+
+> GET one data in schedule
+
+**_Request Header :_**
+
+```
+{
+  "accessToken": "<your access token>"
+}
+```
+
+**_Request Body :_**
+
+```
+not needed
+```
+
+**_Response (200 - OK) :_**
+
+```
+{
+  "id": 2,
+  "price": 100000,
+  "DateTime": "2022-05-24T17:00:00.000Z",
+  "hour": "10:41:39"
+}
+```
+
+**_Response (_500 - There was an error on the server and the request could not be completed, and 401 - Unauthorized, and 404 - Not Found)_**
+
+- 500
+
+```
+{
+  "message": "Internal Server err"
+}
+```
+
+- 401
+
+```
+{
+  "message": "Token nya tidak ada"
+}
+```
+- 404
+```
+{
+  "message": "Schedule yang anda cari tidak ada"
+}
+```
+
+### POST /schedules
+
+> POST new schedule
+
+**_Request Header :_**
+
+```
+{
+  "accessToken": "<your access token>"
+}
+```
+
+**_Request Body :_**
+
+```
+{
+  "price" : "700000",
+  "DateTime" : "2022-06-05T17:00:00.000Z",
+  "hour" : "09:41:39",
+}
+```
+
+**_Response (200 - OK) :_**
+
+```
+{
+  "msg": "Success add new schedule"
+}
+```
+
+**_Response (500 - There was an error on the server and the request could not be completed, 401 -  Unauthorized, 400 - Bad Request) :_**
+
+```
+{
+  "message": "Internal Server err"
+}
+```
+
+```
+{
+  "message": "Token nya tidak ada"
+}
+```
+
+```
+{
+  "message": [
+    "<field> cannot be Null"
+  ]
+}
+```
+
+```
+{
+  "message": [
+    "<field> cannot be Empty"
+  ]
+}
+```
+
+---
+
+### PATCH /schedules
+
+> EDIT  schedule
+
+**_Request Header :_**
+
+```
+{
+  "accessToken": "<your access token>"
+}
+```
+
+**_Request Body :_**
+
+```
+{
+  "price" : "700000",
+  "DateTime" : "2022-06-05T17:00:00.000Z",
+  "hour" : "09:41:39",
+}
+```
+
+**_Response (200 - OK) :_**
+
+```
+{
+  "msg": "Success Edit Schedule id 1"
+}
+```
+
+**_Response (500 - There was an error on the server and the request could not be completed, 401 -  Unauthorized, 400 - Bad Request) :_**
+
+```
+{
+  "message": "Internal Server err"
+}
+```
+
+```
+{
+  "message": "Token nya tidak ada"
+}
+```
+
+```
+{
+  "message": [
+    "<field> cannot be Null"
+  ]
+}
+```
+
+```
+{
+  "message": [
+    "<field> cannot be Empty"
+  ]
+}
+```
+
+---
+
+### DELETE /fields/:fieldId
+
+> Create new asset
+
+**_Request Header :_**
+
+```
+{
+  "accessToken": "<your access token>"
+}
+```
+
+**_Request Body :_**
+
+```
+not need body
+```
+
+**_Response (201 - Created) :_**
+
+```
+{
+  "message": "Delete Field SuccessFuly"
+}
+```
+
+**_Response (_500 - There was an error on the server and the request could not be completed and 404 - Not Found_)_**
+
+- 500
+
+```
+{
+  "message": "Internal Server err"
+}
+```
+
+- 404
+
+```
+{
+  "message": "Product yang anda cari tidak ada"
+}
+```

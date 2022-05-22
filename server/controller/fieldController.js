@@ -49,7 +49,7 @@ class FieldController {
         where: { id: +req.params.fieldId },
       });
 
-      if (!dropField) throw { name: "NOT_PRODUCT" };
+      if (!dropField) throw { name: "NOT_FIELD" };
       res.status(200).json({ message: "Delete Field SuccessFuly" });
     } catch (err) {
       console.log(err);

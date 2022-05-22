@@ -26,9 +26,17 @@ module.exports = (err, req, res, next) => {
       statusCode = 403;
       errMessage = "Kamu tidak ada akses untuk produk ini";
       break;
-    case "NOT_PRODUCT":
+    case "NOT_FIELD":
       statusCode = 404;
-      errMessage = "Product yang anda cari tidak ada";
+      errMessage = "Field yang anda cari tidak ada";
+      break;
+    case "NOT_SCHEDULE":
+      statusCode = 404;
+      errMessage = "Schedule yang anda cari tidak ada";
+      break;
+    case "EMPTY_BODY_SCHEDULE":
+      statusCode = 400;
+      errMessage = "Membutuh kan data minimal 1";
       break;
     default:
       statusCode = 500;
